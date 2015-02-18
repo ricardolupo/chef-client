@@ -37,3 +37,10 @@ end
 service 'chef-client' do
   action [:enable, :start]
 end
+
+# set chef-client service to delayed start so chef-client doesn't time out on Windows restart
+execute 'set-chef-service-autostart' do
+  command "sc config chef-client start= delayed-auto"
+end
+
+
